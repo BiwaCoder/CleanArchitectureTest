@@ -16,6 +16,7 @@ public class AutoBattleController : MonoBehaviour
         var presenter = new BattlePresenter(view);
         var interactor = new BattleInteractor(presenter);
         var controller = new BattleController(interactor);
+        
         var playerCharacter = CharcterRepository.LoadCharcterData(1);
         var enemyCharacter = CharcterRepository.LoadCharcterData(2);
         var playerDialogue = new CharacterDialogue("さぁバトルを始めよう！", "これでどうだ！");

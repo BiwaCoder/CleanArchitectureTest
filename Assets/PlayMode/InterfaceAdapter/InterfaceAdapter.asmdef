@@ -1,9 +1,10 @@
 {
-    "name": "NewAssembly",
+    "name": "InterfaceAdapter",
     "rootNamespace": "",
     "references": [
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
-        "GUID:7bce08a00b4d54cd694096abadbb897e"
+        "GUID:62bc8748130f64720a58c4ff72430bbc",
+        "GUID:d15409c05dcb34d7ea55b56071c9dcb7",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
