@@ -5,6 +5,7 @@ public class GameLifetimeScope : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
     {
-        //builder.Register<BattleAction>(Lifetime.Singleton); 
+        //実装をどうつたえるか？
+        builder.Register<IBattleView,AutoBattleView>(Lifetime.Singleton); 
     }
 }
