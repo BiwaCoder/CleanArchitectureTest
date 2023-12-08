@@ -1,7 +1,11 @@
+
+using VContainer;
+
 public class BattleInteractor : IBattleInputPort
 {
-    private readonly IBattleOutputPort _outputPort;
+    public readonly IBattleOutputPort _outputPort;
 
+    [Inject]
     public BattleInteractor(IBattleOutputPort outputPort)
     {
         _outputPort = outputPort;

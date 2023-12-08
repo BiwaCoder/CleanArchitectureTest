@@ -1,8 +1,11 @@
 //入力をさばく
+using VContainer;
+
 public class BattleController : IBattleController
 {
-    private readonly IBattleInputPort _inputPort;
+    public readonly IBattleInputPort _inputPort;
     
+    [Inject]
     public BattleController(IBattleInputPort inputPort)
     {
         _inputPort = inputPort;
