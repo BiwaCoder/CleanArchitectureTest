@@ -23,6 +23,7 @@ public class AutoBattleController : MonoBehaviour
         //BattleInteractorやBattleActionを入れ替える
         //タップで進む
 
+        //クラス図を書く クラスを生成して処理を始める
         //var view = new AutoBattleView();
         //var presenter = new BattlePresenter(view);
         //var interactor = new BattleInteractor(presenter);
@@ -35,5 +36,13 @@ public class AutoBattleController : MonoBehaviour
         controller.StartBattle(playerCharacter, enemyCharacter, playerDialogue, enemyDialogue); 
     }
 
+    //入力を受け取る
+
+    public void Onclick()
+    {
+        Debug.Log("Onclick");
+        //controller.StartBattle();
+        //controller.Onclick();
+    }
 
 }
