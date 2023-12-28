@@ -3,10 +3,10 @@ using VContainer;
 
 public class BattleController : IBattleController
 {
-    public readonly IBattleInputPort _inputPort;
+    public readonly ITurnBasedBattleInputPort _inputPort;
     
     [Inject]
-    public BattleController(IBattleInputPort inputPort)
+    public BattleController(ITurnBasedBattleInputPort inputPort)
     {
         _inputPort = inputPort;
     }
@@ -16,9 +16,12 @@ public class BattleController : IBattleController
 
     public void StartBattle(Character player, Character enemy,CharacterDialogue playerDialogue,CharacterDialogue enemyDialogue)
     {
-
+        
         _inputPort.HandleBattle(player, enemy, playerDialogue, enemyDialogue);
     }
 
+    public void Onclick(){
+
+    }
 
 }
