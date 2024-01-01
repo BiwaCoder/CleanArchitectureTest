@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IBattleController 
 {
-
-    public void StartBattle(Character player, Character enemy,CharacterDialogue playerDialogue,CharacterDialogue enemyDialogue);
+    public void SetView(TurnBattleView view);
+    public void GameInitialize();
 }

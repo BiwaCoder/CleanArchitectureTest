@@ -1,8 +1,18 @@
 public class CardBattleInteractor : IBattleSystem, CardBattleInputPort
 {
+    public bool IsFirstTurn()
+    {
+        // 初回ターンかどうかの判定
+        return false;
+    }
+
+    public void SettingPlayer()
+    {
+        // ゲーム開始のロジック
+    }
     // ゲームの状態やデータを管理するためのフィールド
 
-    public void InitializeGame()
+    public void InitializeBattle()
     {
         // ゲーム初期化のロジック
     }
@@ -44,4 +54,15 @@ public class CardBattleInteractor : IBattleSystem, CardBattleInputPort
     {
         // デッキ管理の処理
     }
+
+    public void HandleBattle(Character player, Character enemy, CharacterDialogue playerDialogue, CharacterDialogue enemyDialogue)
+    {
+        // バトルの処理
+    }
+
+    public void SetView(TurnBattleView view)
+    {
+        // Viewの設定
+    }
+ 
 }
