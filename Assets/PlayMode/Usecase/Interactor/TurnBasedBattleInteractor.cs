@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPort
 {
-    public readonly IBattleOutputPort _outputPort;
     public TurnBattleUIPresenter uiPresenter ;
 
     BattleInitializer battleInitializer = new BattleInitializer(new PlayerFactory(),new EnemyFactory());
@@ -16,11 +15,6 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
     //エネミーキャラクターのリスト
     public List<Character> enemyList = new List<Character>();
 
-    [Inject]
-    public TurnBasedBattleInteractor(IBattleOutputPort outputPort)
-    {
-        _outputPort = outputPort;
-    }
     
     //[Inject]
     //public void InjectSub()
@@ -68,8 +62,6 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
 
     public void ExecuteTurn()
     {
-
-
         if(IsFirstTurn())
         {
             InitializeBattle();
@@ -83,23 +75,8 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         var iBattleAction = new BattleAction();
         var resultList = iBattleAction.GoNextTurn(playerList[0], enemyList[0], playerDialogue, enemyDialogue);
 
-        _outputPort.PresentBattleResult(resultList);
-
-        //以下のデータを外だし
-        string result ="";
-        foreach (var battleResult in resultList)
-        {
-            if (battleResult.DefeatedMessage != null){
-                result += $"{battleResult.HpStatusMessage} {battleResult.DamageMessage} {battleResult.DefeatedMessage}";
-            }
-            else
-            {
-                result += $"{battleResult.HpStatusMessage} {battleResult.DamageMessage}";
-            }
-        }
-
         //UI弐表示
-        this.uiPresenter.SetPlayerHealth(result);
+        this.uiPresenter.SetPlayerHealth(resultList);
 
 
     }
@@ -125,10 +102,4 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         // 次のプレイヤー/敵のターンへの準備
     }
 
-    public void HandleBattle(Character player, Character enemy,CharacterDialogue playerDialogue,CharacterDialogue enemyDialogue)
-    {
-
-       
-
-    }
 }

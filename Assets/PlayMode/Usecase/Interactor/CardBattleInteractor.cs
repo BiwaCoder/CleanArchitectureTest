@@ -1,4 +1,4 @@
-public class CardBattleInteractor : IBattleSystem, CardBattleInputPort
+public class CardBattleInteractor : IBattleSystem, ICardBattleInputPort
 {
     public bool IsFirstTurn()
     {
