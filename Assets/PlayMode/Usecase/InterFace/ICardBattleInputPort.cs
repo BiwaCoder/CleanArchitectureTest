@@ -1,4 +1,4 @@
-public interface CardBattleInputPort
+public interface ICardBattleInputPort
 {
     void SelectCard(Card card);
     void PlayCard(Card card);

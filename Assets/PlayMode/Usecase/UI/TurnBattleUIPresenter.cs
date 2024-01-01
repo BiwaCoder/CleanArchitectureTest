@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using UniRx;
+using System.Collections.Generic;
 
 public class TurnBattleUIPresenter
 {
@@ -25,10 +26,23 @@ public class TurnBattleUIPresenter
         _interactor.ExecuteTurn();
     }
 
-    public void SetPlayerHealth(string health)
+    public void SetPlayerHealth(List<BattleResult> resultList)
     {
-        _model.SetPlayerHealth(health);
+
+        string result ="";
+        foreach (var battleResult in resultList)
+        {
+            if (battleResult.DefeatedMessage != null){
+                result += $"{battleResult.HpStatusMessage} {battleResult.DamageMessage} {battleResult.DefeatedMessage}";
+            }
+            else
+            {
+                result += $"{battleResult.HpStatusMessage} {battleResult.DamageMessage}";
+            }
+        }
+
+
+        _model.SetPlayerHealth(result);
     }
 
-    // その他のユーザーインタラクションを処理するメソッド
 }
