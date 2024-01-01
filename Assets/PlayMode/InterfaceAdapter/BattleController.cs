@@ -3,25 +3,29 @@ using VContainer;
 
 public class BattleController : IBattleController
 {
-    public readonly ITurnBasedBattleInputPort _inputPort;
+    public readonly IBattleSystem _iBattleSystem;
+    
     
     [Inject]
-    public BattleController(ITurnBasedBattleInputPort inputPort)
+    public BattleController(IBattleSystem battleSystem)
     {
-        _inputPort = inputPort;
+        _iBattleSystem = battleSystem;
     }
 
     //この辺で入力を受け取っても良い
     //AutoBattleControllerでやってる読み込みや低レベルの処理を、インタラクターに受け渡す
-
-    public void StartBattle(Character player, Character enemy,CharacterDialogue playerDialogue,CharacterDialogue enemyDialogue)
+    public void SetView(TurnBattleView view)
     {
-        
-        _inputPort.HandleBattle(player, enemy, playerDialogue, enemyDialogue);
+        _iBattleSystem.SetView(view);
     }
 
     public void Onclick(){
 
+    }
+
+    public void GameInitialize()
+    {
+        _iBattleSystem.SettingPlayer();
     }
 
 }

@@ -9,6 +9,8 @@ public class AutoBattleController : MonoBehaviour
 
     public IBattleController controller;
 
+    public TurnBattleView turnBattleView;
+
     [Inject]
     public void Inject(IBattleController hogeClass)
     {
@@ -33,7 +35,8 @@ public class AutoBattleController : MonoBehaviour
         var enemyCharacter = CharcterRepository.LoadCharcterData(2);
         var playerDialogue = new CharacterDialogue("さぁバトルを始めよう！", "これでどうだ！");
         var enemyDialogue = new CharacterDialogue("お前に私が倒せるかな？", "くらえ！");
-        controller.StartBattle(playerCharacter, enemyCharacter, playerDialogue, enemyDialogue); 
+        controller.SetView(turnBattleView);
+        controller.GameInitialize();
     }
 
     //入力を受け取る
