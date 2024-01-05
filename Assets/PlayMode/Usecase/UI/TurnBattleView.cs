@@ -5,7 +5,6 @@ using UniRx;
 public class TurnBattleView : MonoBehaviour
 {
     public Text PlayerHealthText;
-    public Text EnemyHealthText;
     public Button AttackButton;
 
     // プレゼンターへの参照を保持
@@ -24,10 +23,5 @@ public class TurnBattleView : MonoBehaviour
     public void SetPlayerHealth(string health)
     {
         PlayerHealthText.text = $"Player Health: {health}";
-    }
-
-    public void SetEnemyHealth(int health)
-    {
-        EnemyHealthText.text = $"Enemy Health: {health}";
     }
 }
