@@ -36,6 +36,7 @@ public class AutoBattleController : MonoBehaviour
         var playerDialogue = new CharacterDialogue("さぁバトルを始めよう！", "これでどうだ！");
         var enemyDialogue = new CharacterDialogue("お前に私が倒せるかな？", "くらえ！");
         controller.SetView(turnBattleView);
+        //ゲームのほんと最初の開始処理
         controller.GameInitialize();
     }
 

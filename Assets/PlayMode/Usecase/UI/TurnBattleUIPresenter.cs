@@ -18,7 +18,6 @@ public class TurnBattleUIPresenter
 
         // モデルの変更を購読して、ビューを更新する
         _model.PlayerHealth.Subscribe(health => _view.SetPlayerHealth(health)).AddTo(_view);
-        _model.EnemyHealth.Subscribe(health => _view.SetEnemyHealth(health)).AddTo(_view);
     }
 
     public void OnPlayerAttack()

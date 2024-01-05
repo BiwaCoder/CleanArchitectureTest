@@ -7,10 +7,13 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
 {
     public TurnBattleUIPresenter uiPresenter ;
 
+    //TODO これここにいるか？
     BattleInitializer battleInitializer = new BattleInitializer(new PlayerFactory(),new EnemyFactory());
 
+    // 初回ターンかどうかのフラグ
     bool IsFirstTurnFlag = true;
 
+    //プレイヤーキャラクターのリスト
     public List<Character> playerList = new List<Character>();
     //エネミーキャラクターのリスト
     public List<Character> enemyList = new List<Character>();
@@ -30,15 +33,25 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         UnityEngine.Debug.Log($"StartGame EnemyCount: {enemyList.Count}");
         // ゲーム初期化のロジック
         // プレイヤーや敵の初期化
+
+      
     }
 
     public void SettingPlayer()
     {
         playerList = battleInitializer.InitializePlayer();
         UnityEngine.Debug.Log($"StartGame PlayerCount: {playerList.Count}");
+        //マップの表示
+        GameObjectCreator.Instance.CreateDropDown(this,(int i)=>{ UnityEngine.Debug.Log($"OnDropdownValueChanged:{i}"); });
+
+        //敵を初期化して、UIに表示する
     }
 
-    // ゲームの状態やデータを管理するフィールド
+    public void SelectMap(){
+        //先頭を開始する
+
+    }
+
 
     public bool IsFirstTurn()
     {
@@ -74,6 +87,10 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         //繰り返しバトルを進める
         var iBattleAction = new BattleAction();
         var resultList = iBattleAction.GoNextTurn(playerList[0], enemyList[0], playerDialogue, enemyDialogue);
+
+
+        //敵を倒して状態遷移させる
+        //行動を選ぶ
 
         //UI弐表示
         this.uiPresenter.SetPlayerHealth(resultList);
