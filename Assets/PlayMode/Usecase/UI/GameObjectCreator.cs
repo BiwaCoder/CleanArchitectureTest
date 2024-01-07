@@ -6,7 +6,23 @@ using UnityEngine;
 
 public class GameObjectCreator : SingletonMonoBehaviour<GameObjectCreator>
 {
+
+    [SerializeField] private PlayerStatusView playerStatusView;
+
+    [SerializeField] private EnemyStatusView enemyStatusView;
+
     private GameObject dropdownInstance;
+
+
+    public PlayerStatusView GetView()
+    {
+        return playerStatusView;
+    }
+
+    public EnemyStatusView GetEnemyView()
+    {
+        return enemyStatusView;
+    }
 
     public GameObject CreateDropDown(TurnBasedBattleInteractor interactor,Action<int> callback)
     {

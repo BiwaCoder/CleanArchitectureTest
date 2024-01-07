@@ -7,7 +7,7 @@ public class EnemyFactory
         List<Character> enemies = new List<Character>();
         
         //3体エネミーを作り、リストに追加する
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 1; i++)
         {
             Character enemy = CreateEnemyInstance();
             enemies.Add(enemy);

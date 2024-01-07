@@ -7,6 +7,9 @@ public class TurnBattleUIPresenter
     private TurnBattleView _view;
     private TurnBattleModel _model;
 
+    private PlayerStatusView _playerStatusView;
+
+
     private TurnBasedBattleInteractor _interactor;
 
     public TurnBattleUIPresenter(TurnBattleView view,TurnBasedBattleInteractor interactor)
@@ -42,6 +45,16 @@ public class TurnBattleUIPresenter
 
 
         _model.SetPlayerHealth(result);
+    }
+
+
+    public void SetCharcterList(List<Character> playerList, List<Character> enemyList)
+    {
+        PlayerStatusView data = GameObjectCreator.Instance.GetView();
+        data.SetPlayerStatus(playerList);
+
+        EnemyStatusView enemyData = GameObjectCreator.Instance.GetEnemyView();
+        enemyData.SetPlayerStatus(enemyList);
     }
 
 }

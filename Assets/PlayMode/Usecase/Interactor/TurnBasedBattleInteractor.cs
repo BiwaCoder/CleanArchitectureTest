@@ -25,7 +25,7 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
     //public void InjectSub()
     //{
     public void SetView(TurnBattleView turnBattleView){
-        this.uiPresenter = new TurnBattleUIPresenter(turnBattleView,this);
+        this.uiPresenter = new TurnBattleUIPresenter(turnBattleView,this);   
     }
 
 
@@ -37,7 +37,12 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
 
     public void SettingPlayer()
     {
+        //プレイヤーの初期化
         playerList = battleInitializer.InitializePlayer();
+        //プレイヤーHPの設定
+        this.uiPresenter.SetCharcterList(playerList,enemyList);
+        
+        
         UnityEngine.Debug.Log($"StartGame PlayerCount: {playerList.Count}");
         //マップの、マップの選択
         GameObjectCreator.Instance.CreateDropDown(this,(int i)=>{ 
@@ -98,6 +103,7 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
 
         //UI弐表示
         this.uiPresenter.SetPlayerHealth(resultList);
+        this.uiPresenter.SetCharcterList(playerList,enemyList);
     }
 
     public bool IsEnemyDefeated()
