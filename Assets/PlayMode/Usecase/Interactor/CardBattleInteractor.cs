@@ -12,7 +12,7 @@ public class CardBattleInteractor : IBattleSystem, ICardBattleInputPort
     }
     // ゲームの状態やデータを管理するためのフィールド
 
-    public void InitializeBattle()
+    public void InitializeBattle(int i)
     {
         // ゲーム初期化のロジック
     }

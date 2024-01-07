@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class EnemyFactory 
 {
-    public List<Character> CreateEnemy()
+    public List<Character> CreateEnemy(int enmyPatternId)
     {
         List<Character> enemies = new List<Character>();
         
@@ -21,7 +21,7 @@ public class EnemyFactory
         Character enemy = new Character();
         enemy.Name = "スライム";
         enemy.MaxHp = 10;
-        enemy.Hp = 10;
+        enemy.Hp = 20;
         enemy.Atk = 2;
         enemy.Def = 1;
         enemy.Speed = 1;
