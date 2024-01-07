@@ -19,9 +19,9 @@ public class BattleInitializer {
         return playerList;
     }
 
-    public List<Character> InitializeEnemy()
+    public List<Character> InitializeEnemy(int i)
     {
-        var enemyList = _enemyFactory.CreateEnemy();
+        var enemyList = _enemyFactory.CreateEnemy(i);
         return enemyList;
     }
 

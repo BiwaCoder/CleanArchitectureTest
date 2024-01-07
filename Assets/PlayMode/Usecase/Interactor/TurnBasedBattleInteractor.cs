@@ -2,6 +2,8 @@
 using VContainer;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine;
+using System.Linq;
 
 public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPort
 {
@@ -27,22 +29,21 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
     }
 
 
-    public void InitializeBattle()
+    public void InitializeBattle(int i)
     {
-        enemyList = battleInitializer.InitializeEnemy();
-        UnityEngine.Debug.Log($"StartGame EnemyCount: {enemyList.Count}");
-        // ゲーム初期化のロジック
-        // プレイヤーや敵の初期化
-
-      
+        enemyList = battleInitializer.InitializeEnemy(i);
+        UnityEngine.Debug.Log($"StartGame 敵を初期化しました: {enemyList.Count}");      
     }
 
     public void SettingPlayer()
     {
         playerList = battleInitializer.InitializePlayer();
         UnityEngine.Debug.Log($"StartGame PlayerCount: {playerList.Count}");
-        //マップの表示
-        GameObjectCreator.Instance.CreateDropDown(this,(int i)=>{ UnityEngine.Debug.Log($"OnDropdownValueChanged:{i}"); });
+        //マップの、マップの選択
+        GameObjectCreator.Instance.CreateDropDown(this,(int i)=>{ 
+            UnityEngine.Debug.Log($"OnDropdownValueChanged:{i}"); 
+            InitializeBattle(i);
+        });
 
         //敵を初期化して、UIに表示する
     }
@@ -75,9 +76,16 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
 
     public void ExecuteTurn()
     {
-        if(IsFirstTurn())
+        //戦闘を開始しているかチェックする
+
+        /*if(IsFirstTurn())
         {
-            InitializeBattle();
+            InitializeBattle(1);
+        }*/
+        if(IsEnemyDefeated())
+        {
+            UnityEngine.Debug.Log("敵を倒しているため戦闘をはじめられません。マップを移動してください");
+            return;
         }
         
         //TODO 初回の初期化をまとめる
@@ -88,15 +96,27 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         var iBattleAction = new BattleAction();
         var resultList = iBattleAction.GoNextTurn(playerList[0], enemyList[0], playerDialogue, enemyDialogue);
 
-
-        //敵を倒して状態遷移させる
-        //行動を選ぶ
-
         //UI弐表示
         this.uiPresenter.SetPlayerHealth(resultList);
-
-
     }
+
+    public bool IsEnemyDefeated()
+    {
+        // 敵が全滅したかどうかの判定
+        if(enemyList?.Any() == false ){
+            return true;
+        }
+        else if(enemyList[0].Hp <= 0){
+            //TODO ゲーム終了処理
+            UnityEngine.Debug.Log("ゲーム終了");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     public void UpdateGameStatus()
     {
