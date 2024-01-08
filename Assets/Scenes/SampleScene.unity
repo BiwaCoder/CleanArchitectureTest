@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatusView: {fileID: 334019659}
-  enemyStatusView: {fileID: 0}
+  enemyStatusView: {fileID: 1852265318}
 --- !u!1 &334019657 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3526773353386727872, guid: b74418a6374834329ac2b415498d568a, type: 3}
