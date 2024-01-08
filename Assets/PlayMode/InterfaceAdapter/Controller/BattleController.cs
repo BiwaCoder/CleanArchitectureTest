@@ -19,10 +19,6 @@ public class BattleController : IBattleController
         _iBattleSystem.SetView(view);
     }
 
-    public void Onclick(){
-
-    }
-
     public void GameInitialize()
     {
         _iBattleSystem.SettingPlayer();

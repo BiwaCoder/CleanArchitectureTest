@@ -7,9 +7,6 @@ public class TurnBattleUIPresenter
     private TurnBattleView _view;
     private TurnBattleModel _model;
 
-    private PlayerStatusView _playerStatusView;
-
-
     private TurnBasedBattleInteractor _interactor;
 
     public TurnBattleUIPresenter(TurnBattleView view,TurnBasedBattleInteractor interactor)
