@@ -6,7 +6,6 @@ using System;
 public class MapDropDown : MonoBehaviour, IDropInterface
 {
     private Dropdown _dropdown;
-    TurnBasedBattleInteractor _interactor;
     Action<int> _callback;
 
     void Start()
@@ -23,9 +22,8 @@ public class MapDropDown : MonoBehaviour, IDropInterface
     }
 
 
-    public void SetInteractor(TurnBasedBattleInteractor interactor,Action<int> callback)
+    public void SetCallBack(Action<int> callback)
     {
-        _interactor = interactor;
         _callback = callback;
     }   
 

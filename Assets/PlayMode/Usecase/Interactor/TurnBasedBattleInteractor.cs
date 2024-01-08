@@ -45,7 +45,7 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         
         UnityEngine.Debug.Log($"StartGame PlayerCount: {playerList.Count}");
         //マップの、マップの選択
-        GameObjectCreator.Instance.CreateDropDown(this,(int i)=>{ 
+        GameObjectCreator.Instance.CreateDropDown((int i)=>{ 
             UnityEngine.Debug.Log($"OnDropdownValueChanged:{i}"); 
             InitializeBattle(i);
         });
@@ -81,12 +81,6 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
 
     public void ExecuteTurn()
     {
-        //戦闘を開始しているかチェックする
-
-        /*if(IsFirstTurn())
-        {
-            InitializeBattle(1);
-        }*/
         if(IsEnemyDefeated())
         {
             UnityEngine.Debug.Log("敵を倒しているため戦闘をはじめられません。マップを移動してください");
@@ -101,7 +95,7 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         var iBattleAction = new BattleAction();
         var resultList = iBattleAction.GoNextTurn(playerList[0], enemyList[0], playerDialogue, enemyDialogue);
 
-        //UI弐表示
+        //UIに表示
         this.uiPresenter.SetPlayerHealth(resultList);
         this.uiPresenter.SetCharcterList(playerList,enemyList);
     }

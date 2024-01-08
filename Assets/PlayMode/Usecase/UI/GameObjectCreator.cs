@@ -24,12 +24,12 @@ public class GameObjectCreator : SingletonMonoBehaviour<GameObjectCreator>
         return enemyStatusView;
     }
 
-    public GameObject CreateDropDown(TurnBasedBattleInteractor interactor,Action<int> callback)
+    public GameObject CreateDropDown(Action<int> callback)
     {
         //マッププレハブのロード
         GameObject dropdownPrefab = Resources.Load<UnityEngine.GameObject>("Input/MapSelect");
         dropdownInstance = Instantiate(dropdownPrefab, transform);
-        dropdownInstance.GetComponent<IDropInterface>().SetInteractor(interactor,callback); 
+        dropdownInstance.GetComponent<IDropInterface>().SetCallBack(callback); 
         return dropdownInstance;
     }
 

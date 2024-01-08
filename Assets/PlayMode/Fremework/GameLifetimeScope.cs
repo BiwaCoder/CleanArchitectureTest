@@ -18,8 +18,8 @@ public class GameLifetimeScope : LifetimeScope
 
 
         builder.Register<ITurnBasedBattleInputPort, TurnBasedBattleInteractor>(Lifetime.Singleton);
+        
         builder.Register<IBattleSystem, TurnBasedBattleInteractor>(Lifetime.Singleton);
-
         builder.Register<IBattleController,BattleController>(Lifetime.Singleton);
 
         builder.Register<TurnBattleUIPresenter>(Lifetime.Singleton).WithParameter("view", turnBattleView);
