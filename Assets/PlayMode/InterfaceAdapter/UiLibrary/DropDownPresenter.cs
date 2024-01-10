@@ -1,26 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Codice.Client.BaseCommands;
 using UnityEngine;
+using System;
 
-public class GameObjectCreator : SingletonMonoBehaviour<GameObjectCreator>
+public class DropDownPresenter : MonoBehaviour,IDropDownPresenter
 {
-
-    private GameObject dropdownInstance;
-
+  
     public GameObject CreateDropDown(Action<int> callback)
     {
         //マッププレハブのロード
         GameObject dropdownPrefab = Resources.Load<UnityEngine.GameObject>("Input/MapSelect");
-        dropdownInstance = Instantiate(dropdownPrefab, transform);
+        GameObject dropdownInstance = Instantiate(dropdownPrefab, transform);
         dropdownInstance.GetComponent<IDropInterface>().SetCallBack(callback); 
         return dropdownInstance;
     }
 
-    public void DestroyDropDown()
-    {
-        Destroy(dropdownInstance);
-    }
-    
 }

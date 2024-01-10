@@ -1,22 +1,24 @@
 //入力をさばく
+using UnityEngine;
 using VContainer;
 
-public class BattleController : IBattleController
+public class BattleController : MonoBehaviour
 {
-    public readonly IBattleSystem _iBattleSystem;
-    
+    public IBattleSystem _iBattleSystem;
     
     [Inject]
-    public BattleController(IBattleSystem battleSystem)
+    public void InjectMethod(IBattleSystem battleSystem)
     {
         _iBattleSystem = battleSystem;
+        Debug.Log($"BattleController{_iBattleSystem}");
     }
 
-    //この辺で入力を受け取っても良い
-    //AutoBattleControllerでやってる読み込みや低レベルの処理を、インタラクターに受け渡す
-    public void SetView(TurnBattleView view)
+
+    // Start is called before the first frame update
+    void Start()
     {
-        _iBattleSystem.SetView(view);
+        //ゲームのほんと最初の開始処理
+        GameInitialize();
     }
 
     public void GameInitialize()

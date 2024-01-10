@@ -1,28 +1,34 @@
 using System.Diagnostics;
 using UniRx;
 using System.Collections.Generic;
+using VContainer;
 
 public class TurnBattleUIPresenter
 {
     private TurnBattleView _view;
     private TurnBattleModel _model;
 
-    private TurnBasedBattleInteractor _interactor;
+    //private TurnBasedBattleInteractor _interactor;
 
-    public TurnBattleUIPresenter(TurnBattleView view,TurnBasedBattleInteractor interactor)
+    private iStatusPresenter _statusPresenter;
+
+    [Inject]
+    public TurnBattleUIPresenter(TurnBattleView view,iStatusPresenter statusPresenter)
     {
         _view = view;
+        _statusPresenter = statusPresenter;
+
         _view.SetPresenter(this);
         _model = new TurnBattleModel();
-        _interactor = interactor;
-
         // モデルの変更を購読して、ビューを更新する
         _model.PlayerHealth.Subscribe(health => _view.SetPlayerHealth(health)).AddTo(_view);
+
+        //_interactor = interactor;
     }
 
     public void OnPlayerAttack()
     {
-        _interactor.ExecuteTurn();
+        //_interactor.ExecuteTurn();
     }
 
     public void SetPlayerHealth(List<BattleResult> resultList)
@@ -47,11 +53,7 @@ public class TurnBattleUIPresenter
 
     public void SetCharcterList(List<Character> playerList, List<Character> enemyList)
     {
-        PlayerStatusView data = GameObjectCreator.Instance.GetView();
-        data.SetPlayerStatus(playerList);
-
-        EnemyStatusView enemyData = GameObjectCreator.Instance.GetEnemyView();
-        enemyData.SetPlayerStatus(enemyList);
+        _statusPresenter.ViewStatus(playerList,enemyList);;
     }
 
 }

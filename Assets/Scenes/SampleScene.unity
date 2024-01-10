@@ -216,9 +216,9 @@ GameObject:
   - component: {fileID: 152948328}
   - component: {fileID: 152948327}
   - component: {fileID: 152948331}
-  - component: {fileID: 152948332}
   - component: {fileID: 152948333}
   - component: {fileID: 152948334}
+  - component: {fileID: 152948335}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -325,19 +325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerHealthText: {fileID: 1594487302}
   AttackButton: {fileID: 1642751390}
---- !u!114 &152948332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152948326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb8da81c85c047d69f54322236ff27c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnBattleView: {fileID: 152948331}
 --- !u!114 &152948333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,9 +340,12 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects: []
-  testMonoBehaviour: {fileID: 152948332}
+  autoInjectGameObjects:
+  - {fileID: 152948326}
   turnBattleView: {fileID: 152948331}
+  testMonoBehaviour: {fileID: 152948326}
+  enemyStatusView: {fileID: 1852265318}
+  playerStatusView: {fileID: 334019659}
 --- !u!114 &152948334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,8 +358,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12b11398007d434aa86f8b9c66cdaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatusView: {fileID: 334019659}
-  enemyStatusView: {fileID: 1852265318}
+--- !u!114 &152948335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152948326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d87df427b4f4e4bb62a773be754f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &334019657 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3526773353386727872, guid: b74418a6374834329ac2b415498d568a, type: 3}

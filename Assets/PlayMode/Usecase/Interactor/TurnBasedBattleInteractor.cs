@@ -5,9 +5,11 @@ using System.Diagnostics;
 using UnityEngine;
 using System.Linq;
 
-public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPort
+public class TurnBasedBattleInteractor : IBattleSystem
 {
     public TurnBattleUIPresenter uiPresenter ;
+
+    public IDropDownPresenter dropDownPresentor;
 
     //TODO これここにいるか？
     BattleInitializer battleInitializer = new BattleInitializer(new PlayerFactory(),new EnemyFactory());
@@ -20,14 +22,12 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
     //エネミーキャラクターのリスト
     public List<Character> enemyList = new List<Character>();
 
-    
-    //[Inject]
-    //public void InjectSub()
-    //{
-    public void SetView(TurnBattleView turnBattleView){
-        this.uiPresenter = new TurnBattleUIPresenter(turnBattleView,this);   
+    [Inject]
+    public TurnBasedBattleInteractor(TurnBattleUIPresenter uiPresenter)
+    {
+        UnityEngine.Debug.Log("TurnBasedBattleInteractor");;
+        this.uiPresenter = uiPresenter;
     }
-
 
     public void InitializeBattle(int i)
     {
@@ -45,13 +45,14 @@ public class TurnBasedBattleInteractor : IBattleSystem, ITurnBasedBattleInputPor
         
         UnityEngine.Debug.Log($"StartGame PlayerCount: {playerList.Count}");
         //マップの、マップの選択
-        GameObjectCreator.Instance.CreateDropDown((int i)=>{ 
+        dropDownPresentor.CreateDropDown((int i)=>{ 
             UnityEngine.Debug.Log($"OnDropdownValueChanged:{i}"); 
             InitializeBattle(i);
         });
 
         //敵を初期化して、UIに表示する
     }
+
 
     public void SelectMap(){
         //先頭を開始する

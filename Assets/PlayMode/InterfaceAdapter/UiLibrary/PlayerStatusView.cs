@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyStatusView : MonoBehaviour
+public class PlayerStatusView : MonoBehaviour,iStatusView
 {
     public List<Text> CharacterStatusText;
 
@@ -20,16 +20,5 @@ public class EnemyStatusView : MonoBehaviour
             }
         }
 
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

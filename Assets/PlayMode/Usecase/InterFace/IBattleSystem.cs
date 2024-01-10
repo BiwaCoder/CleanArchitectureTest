@@ -8,6 +8,4 @@ public interface IBattleSystem
     void UpdateGameStatus();
     void EndTurn();
     bool CheckGameEnd();
-
-    public void SetView(TurnBattleView view);
 }
