@@ -8,7 +8,7 @@ public class TurnBattleUIPresenter
     private TurnBattleView _view;
     private TurnBattleModel _model;
 
-    //private TurnBasedBattleInteractor _interactor;
+    private TurnBasedBattleInteractor _interactor;
 
     private iStatusPresenter _statusPresenter;
 
@@ -22,13 +22,18 @@ public class TurnBattleUIPresenter
         _model = new TurnBattleModel();
         // モデルの変更を購読して、ビューを更新する
         _model.PlayerHealth.Subscribe(health => _view.SetPlayerHealth(health)).AddTo(_view);
+    }
 
-        //_interactor = interactor;
+    //TODO とりあえず作ったけど後でリファクタ
+    public void SetInteractor(TurnBasedBattleInteractor interactor)
+    {
+        _interactor = interactor;
     }
 
     public void OnPlayerAttack()
     {
-        //_interactor.ExecuteTurn();
+        UnityEngine.Debug.Log("OnPlayerAttack");
+        _interactor.ExecuteTurn();
     }
 
     public void SetPlayerHealth(List<BattleResult> resultList)

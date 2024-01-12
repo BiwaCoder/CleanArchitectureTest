@@ -1,3 +1,4 @@
+using UnityEngine;
 public class CardBattleInteractor : IBattleSystem, ICardBattleInputPort
 {
     public bool IsFirstTurn()
@@ -65,4 +66,8 @@ public class CardBattleInteractor : IBattleSystem, ICardBattleInputPort
         // Viewの設定
     }
  
+    public void SetParentObject(GameObject parent)
+    {
+        // Viewの設定
+    }
 }

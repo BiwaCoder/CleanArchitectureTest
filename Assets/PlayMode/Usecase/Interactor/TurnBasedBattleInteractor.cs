@@ -7,6 +7,7 @@ using System.Linq;
 
 public class TurnBasedBattleInteractor : IBattleSystem
 {
+    GameObject parentObject;
     public TurnBattleUIPresenter uiPresenter ;
 
     public IDropDownPresenter dropDownPresentor;
@@ -23,10 +24,12 @@ public class TurnBasedBattleInteractor : IBattleSystem
     public List<Character> enemyList = new List<Character>();
 
     [Inject]
-    public TurnBasedBattleInteractor(TurnBattleUIPresenter uiPresenter)
+    public TurnBasedBattleInteractor(TurnBattleUIPresenter uiPresenter,IDropDownPresenter dropDownPresentor)
     {
         UnityEngine.Debug.Log("TurnBasedBattleInteractor");;
         this.uiPresenter = uiPresenter;
+        this.uiPresenter.SetInteractor(this);
+        this.dropDownPresentor = dropDownPresentor;
     }
 
     public void InitializeBattle(int i)
@@ -48,7 +51,7 @@ public class TurnBasedBattleInteractor : IBattleSystem
         dropDownPresentor.CreateDropDown((int i)=>{ 
             UnityEngine.Debug.Log($"OnDropdownValueChanged:{i}"); 
             InitializeBattle(i);
-        });
+        },parentObject);
 
         //敵を初期化して、UIに表示する
     }
@@ -82,6 +85,7 @@ public class TurnBasedBattleInteractor : IBattleSystem
 
     public void ExecuteTurn()
     {
+        UnityEngine.Debug.Log("ExecuteTurn");
         if(IsEnemyDefeated())
         {
             UnityEngine.Debug.Log("敵を倒しているため戦闘をはじめられません。マップを移動してください");
@@ -138,6 +142,11 @@ public class TurnBasedBattleInteractor : IBattleSystem
     {
         // ターン終了のロジック
         // 次のプレイヤー/敵のターンへの準備
+    }
+
+    public void SetParentObject(GameObject parent)
+    {
+       parentObject = parent;
     }
 
 }

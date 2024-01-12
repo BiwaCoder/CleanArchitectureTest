@@ -1,3 +1,4 @@
+using UnityEngine;
 public interface IBattleSystem
 {
 
@@ -8,4 +9,5 @@ public interface IBattleSystem
     void UpdateGameStatus();
     void EndTurn();
     bool CheckGameEnd();
+    void SetParentObject(GameObject parent);
 }

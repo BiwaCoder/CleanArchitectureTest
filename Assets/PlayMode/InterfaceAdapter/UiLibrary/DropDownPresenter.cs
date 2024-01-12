@@ -6,11 +6,11 @@ using System;
 public class DropDownPresenter : MonoBehaviour,IDropDownPresenter
 {
   
-    public GameObject CreateDropDown(Action<int> callback)
+    public GameObject CreateDropDown(Action<int> callback,GameObject parent)
     {
         //マッププレハブのロード
         GameObject dropdownPrefab = Resources.Load<UnityEngine.GameObject>("Input/MapSelect");
-        GameObject dropdownInstance = Instantiate(dropdownPrefab, transform);
+        GameObject dropdownInstance = Instantiate(dropdownPrefab, parent.transform);
         dropdownInstance.GetComponent<IDropInterface>().SetCallBack(callback); 
         return dropdownInstance;
     }

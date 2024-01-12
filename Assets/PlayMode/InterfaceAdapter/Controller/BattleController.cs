@@ -18,6 +18,7 @@ public class BattleController : MonoBehaviour
     void Start()
     {
         //ゲームのほんと最初の開始処理
+        _iBattleSystem.SetParentObject(this.gameObject);
         GameInitialize();
     }
 
