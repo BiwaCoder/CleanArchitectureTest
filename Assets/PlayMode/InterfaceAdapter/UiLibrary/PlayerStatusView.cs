@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStatusView : MonoBehaviour,iStatusView
+public class PlayerStatusView : MonoBehaviour,IStatusView
 {
     public List<Text> CharacterStatusText;
 

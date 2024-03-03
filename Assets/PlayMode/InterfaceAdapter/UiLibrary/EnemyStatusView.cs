@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyStatusView : MonoBehaviour,iStatusView
+public class EnemyStatusView : MonoBehaviour,IStatusView
 {
     public List<Text> CharacterStatusText;
 

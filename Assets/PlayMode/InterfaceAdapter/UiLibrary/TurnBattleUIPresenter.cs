@@ -8,10 +8,10 @@ public class TurnBattleUIPresenter : ITurnBattleOutputPort
     private TurnBattleView _view;
     private TurnBattleModel _model;
 
-    private iStatusPresenter _statusPresenter;
+    private IStatusPresenter _statusPresenter;
 
     [Inject]
-    public TurnBattleUIPresenter(TurnBattleView view,iStatusPresenter statusPresenter,TurnBattleModel model)
+    public TurnBattleUIPresenter(TurnBattleView view,IStatusPresenter statusPresenter,TurnBattleModel model)
     {
         _view = view;
         _view.SetPresenter(this);

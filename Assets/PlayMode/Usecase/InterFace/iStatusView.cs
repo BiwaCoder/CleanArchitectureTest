@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface iStatusView 
+public interface IStatusView 
 {
     void SetPlayerStatus(List<Character> playerList);
 }

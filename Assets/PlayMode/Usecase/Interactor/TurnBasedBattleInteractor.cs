@@ -15,7 +15,7 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 
 
     //リポジトリのインターフェース-------------------------------------
-    private ICharcterRepository _charcterRepository;
+    private ICharacterRepository _charcterRepository;
 
 
     //ロジックのインターフェース-------------------------------------
@@ -27,7 +27,7 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
     
 
     [Inject]
-    public TurnBasedBattleInteractor(ITurnBattleOutputPort outputPort, ICharcterRepository charcterRepository, IBattleActionInterface battleAction)
+    public TurnBasedBattleInteractor(ITurnBattleOutputPort outputPort, ICharacterRepository charcterRepository, IBattleActionInterface battleAction)
     {
         iTurnBattleOutputPort = outputPort;
         _charcterRepository = charcterRepository;

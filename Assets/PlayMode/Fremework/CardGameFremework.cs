@@ -4,7 +4,6 @@ using VContainer;
 
 public class CardGameFremework : MonoBehaviour
 {
-
     public TurnBattleInputView _turnBattleInputView;
 
     public IDropDownPresenter dropDownInteractor;

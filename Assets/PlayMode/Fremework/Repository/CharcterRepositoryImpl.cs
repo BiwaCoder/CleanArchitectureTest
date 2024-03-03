@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CharcterRepositoryImp : ICharcterRepository
+public class CharcterRepositoryImpl : ICharacterRepository
 {
     public List<Character> InitializePlayer()
     {
