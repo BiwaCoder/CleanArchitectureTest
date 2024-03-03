@@ -23,6 +23,20 @@ CardGameFremeworkが、MonobehaviorとなっておりここでUnityとのつな�
 InterfaceAdapterのBattleControllerをUnity側の仕組みから依存をさせないようにしている
 
 GameLifetimeScopeが、DIを行い、CharcterRepositoryImplはリポジトリの実装を行っている
-このあたりも、システムの外側の昨日をフレームワーク層にまとめている
+このあたりも、システムの外側の機能をフレームワーク層にまとめている
 
 InterfaceAdapter
+
+Battlecontrolerが、フレームワーク層から送られてきたイベントを整理して、
+インタラクターのインタフェースに指示を送る
+Unityから独立した処理をさばくコントローラが実現できている
+
+Usecase
+実際のビジネスロジック、ゲームのロジックを実装している
+ターンゲームのロジックである、TurnBasedBattleInteractorと
+ダメージ計算ロジックのBattleActionがある
+ドメイン層ととインタフェースに依存しているだけでテストしやすい
+
+DomainModel
+ユースケースを成り立たせるデータ群
+データのみなので独立性が高い
