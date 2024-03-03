@@ -6,19 +6,25 @@ using System;
 
 public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 {
-    private ITurnBattleOutputPort iTurnBattleOutputPort ;
-    
-    //プレイヤーキャラクターのリスト
+
+    //ドメインモデル------------------------------------
     private List<Character> playerList = new List<Character>();
-    //エネミーキャラクターのリスト
     private List<Character> enemyList = new List<Character>();
-    
     private CharacterDialogue playerDialogue;
     private CharacterDialogue enemyDialogue;
 
+
+    //リポジトリのインターフェース-------------------------------------
     private ICharcterRepository _charcterRepository;
 
+
+    //ロジックのインターフェース-------------------------------------
     private IBattleActionInterface iBattleAction;
+
+
+    //UIのインターフェース-------------------------------------
+    private ITurnBattleOutputPort iTurnBattleOutputPort ;
+    
 
     [Inject]
     public TurnBasedBattleInteractor(ITurnBattleOutputPort outputPort, ICharcterRepository charcterRepository, IBattleActionInterface battleAction)
@@ -41,8 +47,7 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
         this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);        
     }
 
-    //敵データの初期化、ドロップダウンの変更似合わせて
-    //マップの選択に合わせてデータを反映
+    //敵データの初期化、ドロップダウンでマップの選択に合わせてデータを反映
     public void SelectMapAndInitializeEnemy(int i)
     {
         enemyList = _charcterRepository.InitializeEnemy(i);
