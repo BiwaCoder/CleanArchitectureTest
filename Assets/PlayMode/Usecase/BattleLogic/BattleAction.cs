@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleAction : BattleActionInterface
+public class BattleAction : IBattleActionInterface
 {
     public List<BattleResult> GoNextTurn(Character player, Character enemy,CharacterDialogue playerDialogue,CharacterDialogue enemyDialogue)
     {
         List<BattleResult> battleResults = new List<BattleResult>();
 
-        var playerAttackResult = Attack(player, enemy);
+        var playerAttackResult = attack(player, enemy);
         playerAttackResult.DamageMessage = $"{player.Name} attacks! {enemy.Name} takes {playerAttackResult.damage} damage.";
         playerAttackResult.HpStatusMessage = $"{player.Name} HP: {player.Hp}, {enemy.Name} HP: {enemy.Hp} {playerDialogue.AttackDialogue}";
         
@@ -20,7 +20,7 @@ public class BattleAction : BattleActionInterface
         }
         else{
             battleResults.Add(playerAttackResult);
-            var enemyAttackResult = Attack(enemy, player);
+            var enemyAttackResult = attack(enemy, player);
             enemyAttackResult.DamageMessage = $"{enemy.Name} attacks! {player.Name} takes {enemyAttackResult.damage} damage.";  
             enemyAttackResult.HpStatusMessage = $"{player.Name} HP: {player.Hp}, {enemy.Name} HP: {enemy.Hp} {enemyDialogue.AttackDialogue}";
       
@@ -34,7 +34,7 @@ public class BattleAction : BattleActionInterface
     }
 
     //攻撃する
-    public BattleResult Attack(Character attacker, Character defender)
+    private BattleResult attack(Character attacker, Character defender)
     {
         //攻撃力から防御力を引いた値をダメージとする
         int damage = attacker.Atk - defender.Def;

@@ -6,7 +6,7 @@ using System;
 
 public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 {
-    public TurnBattleUIPresenter uiPresenter ;
+    private ITurnBattleOutputPort iTurnBattleOutputPort ;
     
     //プレイヤーキャラクターのリスト
     private List<Character> playerList = new List<Character>();
@@ -18,12 +18,14 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 
     private ICharcterRepository _charcterRepository;
 
+    private IBattleActionInterface iBattleAction;
+
     [Inject]
-    public TurnBasedBattleInteractor(TurnBattleUIPresenter uiPresenter, ICharcterRepository charcterRepository)
+    public TurnBasedBattleInteractor(ITurnBattleOutputPort outputPort, ICharcterRepository charcterRepository, IBattleActionInterface battleAction)
     {
-        UnityEngine.Debug.Log("TurnBasedBattleInteractor");;
-        this.uiPresenter = uiPresenter;
+        iTurnBattleOutputPort = outputPort;
         _charcterRepository = charcterRepository;
+        iBattleAction = battleAction;
     }
 
     //プレイヤーの初期化
@@ -31,13 +33,12 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
     {
         //プレイヤーの初期化
         playerList = _charcterRepository.InitializePlayer();
-        var dialog = _charcterRepository.InitCharcterDialog();
-        playerDialogue = dialog.Item1;
-        enemyDialogue = dialog.Item2;
+        var characterDialogs = _charcterRepository.InitCharcterDialog();
+        playerDialogue = characterDialogs.Item1;
+        enemyDialogue = characterDialogs.Item2;
    
         //プレイヤーHPの設定
-        this.uiPresenter.SetCharcterList(playerList,enemyList);        
-        UnityEngine.Debug.Log($"StartGame PlayerCount: {playerList.Count}");
+        this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);        
     }
 
     //敵データの初期化、ドロップダウンの変更似合わせて
@@ -45,8 +46,7 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
     public void SelectMapAndInitializeEnemy(int i)
     {
         enemyList = _charcterRepository.InitializeEnemy(i);
-        UnityEngine.Debug.Log($"StartGame 敵を初期化しました: {enemyList.Count}");
-        this.uiPresenter.SetCharcterList(playerList,enemyList);              
+        this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);              
     }
 
     //状況が揃っているなら、ターンを進行させる
@@ -58,14 +58,12 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
             UnityEngine.Debug.Log("敵を倒しているため戦闘をはじめられません。マップを移動してください");
             return;
         }
-        
-        //繰り返しバトルを進める
-        var iBattleAction = new BattleAction();
+
         var resultList = iBattleAction.GoNextTurn(playerList[0], enemyList[0], playerDialogue, enemyDialogue);
 
         //UIに表示
-        this.uiPresenter.SetPlayerHealth(resultList);
-        this.uiPresenter.SetCharcterList(playerList,enemyList);
+        this.iTurnBattleOutputPort.SetPlayerHealth(resultList);
+        this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);
     }
 
 

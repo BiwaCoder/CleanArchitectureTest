@@ -3,7 +3,7 @@ using UniRx;
 using System.Collections.Generic;
 using VContainer;
 
-public class TurnBattleUIPresenter
+public class TurnBattleUIPresenter : ITurnBattleOutputPort
 {
     private TurnBattleView _view;
     private TurnBattleModel _model;
@@ -11,14 +11,13 @@ public class TurnBattleUIPresenter
     private iStatusPresenter _statusPresenter;
 
     [Inject]
-    public TurnBattleUIPresenter(TurnBattleView view,iStatusPresenter statusPresenter)
+    public TurnBattleUIPresenter(TurnBattleView view,iStatusPresenter statusPresenter,TurnBattleModel model)
     {
         _view = view;
-        _statusPresenter = statusPresenter;
-
         _view.SetPresenter(this);
-        _model = new TurnBattleModel();
-        // モデルの変更を購読して、ビューを更新する
+        _statusPresenter = statusPresenter;
+        _model = model;
+
         _model.PlayerHealth.Subscribe(health => _view.SetPlayerHealth(health)).AddTo(_view);
     }
 
