@@ -1,6 +1,8 @@
+using UnityEngine;
 public interface ITurnBasedBattleInputPort
 {
-    void PerformAction(TurnBattleAction action);
-    void EndTurn();
-}
 
+    void SettingPlayer();
+    public void SelectMapAndInitializeEnemy(int i);
+    void ExecuteTurn();
+}

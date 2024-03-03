@@ -5,19 +5,13 @@ using UniRx;
 public class TurnBattleView : MonoBehaviour
 {
     public Text PlayerHealthText;
-    public Button AttackButton;
-
+    
     // プレゼンターへの参照を保持
     private TurnBattleUIPresenter _presenter;
 
     public void SetPresenter(TurnBattleUIPresenter presenter)
     {
         _presenter = presenter;
-    }
-
-    void Start()
-    {
-        AttackButton.onClick.AddListener(() => _presenter.OnPlayerAttack());
     }
 
     public void SetPlayerHealth(string health)

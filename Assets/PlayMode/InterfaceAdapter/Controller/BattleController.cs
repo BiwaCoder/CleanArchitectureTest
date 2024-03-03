@@ -1,30 +1,29 @@
-//入力をさばく
-using UnityEngine;
 using VContainer;
 
-public class BattleController : MonoBehaviour
+
+public class BattleController : IBattleController
 {
-    public IBattleSystem _iBattleSystem;
+    public ITurnBasedBattleInputPort _iTurnBasedInputPort;
     
     [Inject]
-    public void InjectMethod(IBattleSystem battleSystem)
+    public BattleController(ITurnBasedBattleInputPort iBattleSystem)
     {
-        _iBattleSystem = battleSystem;
-        Debug.Log($"BattleController{_iBattleSystem}");
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //ゲームのほんと最初の開始処理
-        _iBattleSystem.SetParentObject(this.gameObject);
-        GameInitialize();
+        _iTurnBasedInputPort = iBattleSystem;
     }
 
     public void GameInitialize()
     {
-        _iBattleSystem.SettingPlayer();
+        _iTurnBasedInputPort.SettingPlayer();
+    }
+
+    public void SelectMap(int i)
+    {
+        _iTurnBasedInputPort.SelectMapAndInitializeEnemy(i);
+    }
+
+    public void HandleAttackPressed()
+    {
+        _iTurnBasedInputPort.ExecuteTurn();
     }
 
 }

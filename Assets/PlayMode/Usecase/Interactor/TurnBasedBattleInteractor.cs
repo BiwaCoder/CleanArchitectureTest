@@ -1,88 +1,55 @@
 
 using VContainer;
 using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
 using System.Linq;
+using System;
 
-public class TurnBasedBattleInteractor : IBattleSystem
+public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 {
-    GameObject parentObject;
     public TurnBattleUIPresenter uiPresenter ;
-
-    public IDropDownPresenter dropDownPresentor;
-
-    //TODO これここにいるか？
-    BattleInitializer battleInitializer = new BattleInitializer(new PlayerFactory(),new EnemyFactory());
-
-    // 初回ターンかどうかのフラグ
-    bool IsFirstTurnFlag = true;
-
+    
     //プレイヤーキャラクターのリスト
-    public List<Character> playerList = new List<Character>();
+    private List<Character> playerList = new List<Character>();
     //エネミーキャラクターのリスト
-    public List<Character> enemyList = new List<Character>();
+    private List<Character> enemyList = new List<Character>();
+    
+    private CharacterDialogue playerDialogue;
+    private CharacterDialogue enemyDialogue;
+
+    private ICharcterRepository _charcterRepository;
 
     [Inject]
-    public TurnBasedBattleInteractor(TurnBattleUIPresenter uiPresenter,IDropDownPresenter dropDownPresentor)
+    public TurnBasedBattleInteractor(TurnBattleUIPresenter uiPresenter, ICharcterRepository charcterRepository)
     {
         UnityEngine.Debug.Log("TurnBasedBattleInteractor");;
         this.uiPresenter = uiPresenter;
-        this.uiPresenter.SetInteractor(this);
-        this.dropDownPresentor = dropDownPresentor;
+        _charcterRepository = charcterRepository;
     }
 
-    public void InitializeBattle(int i)
-    {
-        enemyList = battleInitializer.InitializeEnemy(i);
-        UnityEngine.Debug.Log($"StartGame 敵を初期化しました: {enemyList.Count}");      
-    }
-
+    //プレイヤーの初期化
     public void SettingPlayer()
     {
         //プレイヤーの初期化
-        playerList = battleInitializer.InitializePlayer();
+        playerList = _charcterRepository.InitializePlayer();
+        var dialog = _charcterRepository.InitCharcterDialog();
+        playerDialogue = dialog.Item1;
+        enemyDialogue = dialog.Item2;
+   
         //プレイヤーHPの設定
-        this.uiPresenter.SetCharcterList(playerList,enemyList);
-        
-        
+        this.uiPresenter.SetCharcterList(playerList,enemyList);        
         UnityEngine.Debug.Log($"StartGame PlayerCount: {playerList.Count}");
-        //マップの、マップの選択
-        dropDownPresentor.CreateDropDown((int i)=>{ 
-            UnityEngine.Debug.Log($"OnDropdownValueChanged:{i}"); 
-            InitializeBattle(i);
-        },parentObject);
-
-        //敵を初期化して、UIに表示する
     }
 
-
-    public void SelectMap(){
-        //先頭を開始する
-
-    }
-
-
-    public bool IsFirstTurn()
+    //敵データの初期化、ドロップダウンの変更似合わせて
+    //マップの選択に合わせてデータを反映
+    public void SelectMapAndInitializeEnemy(int i)
     {
-        // 初回ターンかどうかの判定
-        if(IsFirstTurnFlag){
-            IsFirstTurnFlag = false;
-            return true;
-        }
-        else{
-            return false;
-        }
+        enemyList = _charcterRepository.InitializeEnemy(i);
+        UnityEngine.Debug.Log($"StartGame 敵を初期化しました: {enemyList.Count}");
+        this.uiPresenter.SetCharcterList(playerList,enemyList);              
     }
 
-
-    public void PerformAction(TurnBattleAction action)
-    {
-        // プレイヤーのアクションを処理
-        
-    }
-
-
+    //状況が揃っているなら、ターンを進行させる
     public void ExecuteTurn()
     {
         UnityEngine.Debug.Log("ExecuteTurn");
@@ -92,10 +59,6 @@ public class TurnBasedBattleInteractor : IBattleSystem
             return;
         }
         
-        //TODO 初回の初期化をまとめる
-        var playerDialogue = new CharacterDialogue("さぁバトルを始めよう！", "これでどうだ！");
-        var enemyDialogue = new CharacterDialogue("お前に私が倒せるかな？", "くらえ！");
-                
         //繰り返しバトルを進める
         var iBattleAction = new BattleAction();
         var resultList = iBattleAction.GoNextTurn(playerList[0], enemyList[0], playerDialogue, enemyDialogue);
@@ -105,7 +68,9 @@ public class TurnBasedBattleInteractor : IBattleSystem
         this.uiPresenter.SetCharcterList(playerList,enemyList);
     }
 
-    public bool IsEnemyDefeated()
+
+
+    private bool IsEnemyDefeated()
     {
         // 敵が全滅したかどうかの判定
         if(enemyList?.Any() == false ){
@@ -120,33 +85,6 @@ public class TurnBasedBattleInteractor : IBattleSystem
         {
             return false;
         }
-    }
-
-
-    public void UpdateGameStatus()
-    {
-        // ゲームステータスの更新
-        // HPや状態異常などの更新
-    }
-
-
-    public bool CheckGameEnd()
-    {
-        // ゲーム終了条件のチェック（全員のHPが0、時間切れなど）
-        return false;
-    }
-
-    // TurnBasedBattleInputPort のメソッド実装
-
-    public void EndTurn()
-    {
-        // ターン終了のロジック
-        // 次のプレイヤー/敵のターンへの準備
-    }
-
-    public void SetParentObject(GameObject parent)
-    {
-       parentObject = parent;
     }
 
 }

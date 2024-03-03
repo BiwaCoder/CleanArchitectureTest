@@ -218,8 +218,9 @@ GameObject:
   - component: {fileID: 152948331}
   - component: {fileID: 152948333}
   - component: {fileID: 152948334}
-  - component: {fileID: 152948335}
   - component: {fileID: 152948336}
+  - component: {fileID: 152948337}
+  - component: {fileID: 152948338}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -325,7 +326,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealthText: {fileID: 1594487302}
-  AttackButton: {fileID: 1642751390}
 --- !u!114 &152948333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,18 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12b11398007d434aa86f8b9c66cdaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &152948335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152948326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d87df427b4f4e4bb62a773be754f62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &152948336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +371,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c0198f13c3b4a37a7d77a699fc5867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &152948337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152948326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5c48aeaf24d402186723a5fad1ccdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackButton: {fileID: 1642751390}
+--- !u!114 &152948338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152948326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3484c91f819654fa687fb51042db7d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _turnBattleInputView: {fileID: 152948337}
 --- !u!1 &334019657 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3526773353386727872, guid: b74418a6374834329ac2b415498d568a, type: 3}

@@ -17,9 +17,10 @@ public class GameLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         Debug.Log("GameLifetimeScope");
+        builder.Register<IBattleController,BattleController>(Lifetime.Singleton);
         
-        builder.Register<IBattleOutputPort,BattlePresenter>(Lifetime.Singleton);
-        builder.Register<IBattleSystem, TurnBasedBattleInteractor>(Lifetime.Singleton); 
+        builder.Register<ITurnBasedBattleInputPort, TurnBasedBattleInteractor>(Lifetime.Singleton); 
+        builder.Register<ICharcterRepository, CharcterRepositoryImp>(Lifetime.Singleton);
         builder.Register<IDropDownPresenter, DropDownPresenter>(Lifetime.Singleton);
         builder.Register<TurnBattleUIPresenter>(Lifetime.Singleton).WithParameter("view", turnBattleView).WithParameter("statusPresenter", new StatusViewPresentor(playerStatusView,enemyStatusView));
         

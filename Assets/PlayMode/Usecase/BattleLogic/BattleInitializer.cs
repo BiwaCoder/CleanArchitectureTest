@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class BattleInitializer {
+public static class BattleInitializer {
+    private static readonly Lazy<PlayerFactory> _playerFactory = new Lazy<PlayerFactory>(() => new PlayerFactory());
+    private static readonly Lazy<EnemyFactory> _enemyFactory = new Lazy<EnemyFactory>(() => new EnemyFactory());
 
-    private PlayerFactory _playerFactory;
-    private EnemyFactory _enemyFactory;
 
-    public BattleInitializer(PlayerFactory playerFactory,EnemyFactory enemyFactory)
+    //private static PlayerFactory _playerFactory;
+    //private static EnemyFactory _enemyFactory;
+
+    /*
+    public  BattleInitializer(PlayerFactory playerFactory,EnemyFactory enemyFactory)
     {
         _playerFactory = playerFactory;
         _enemyFactory = enemyFactory;
-    }
+    }*/
 
-    public List<Character> InitializePlayer()
+    public static List<Character> InitializePlayer()
     {
-        var playerList = _playerFactory.CreatePlayer();
+        var playerList = _playerFactory.Value.CreatePlayer();
         return playerList;
     }
 
-    public List<Character> InitializeEnemy(int i)
+    public static List<Character> InitializeEnemy(int i)
     {
-        var enemyList = _enemyFactory.CreateEnemy(i);
+        var enemyList = _enemyFactory.Value.CreateEnemy(i);
         return enemyList;
     }
 
