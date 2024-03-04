@@ -54,7 +54,7 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
         this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);              
     }
 
-    //状況が揃っているなら、ターンを進行させる
+    //ターンを進行させる
     public void ExecuteTurn()
     {
         UnityEngine.Debug.Log("ExecuteTurn");
