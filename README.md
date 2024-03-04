@@ -42,7 +42,7 @@ Usecase
 DomainModel
 
 ## 解説
-Fremework層
+### Fremework層
 
 この層では、Unityなどフレームワークを使った処理、またOSなどに関係するファイル読み書きなどを実装するレイヤーとなっている
 具体的にはMonobehaviorを使ったUI作成関連処理はこのレイヤーで実装し、他のレイヤーからはインタフェースを通じてアクセスする(依存性の逆転）
@@ -53,18 +53,18 @@ GameLifetimeScopeはDIの実施を、インタラクターで使うUIはここ�
 CharcterRepositoryImplはリポジトリの実装を行っている
 
 
-InterfaceAdapter
+### InterfaceAdapter
 
 Battlecontrolerが、フレームワーク層から送られてきたイベントを整理して、
 インタラクターのインタフェースに指示を送る
 Unityから独立した処理をさばくコントローラとして実現している
 
-Usecase
+### Usecase
 実際のビジネスロジック、ゲームのロジックを実装している
 ターンゲームのロジックである、TurnBasedBattleInteractorと
 ダメージ計算ロジックのBattleActionがある
 ドメイン層ととインタフェースに依存しているだけでテストしやすい
 
-DomainModel
+### DomainModel
 ユースケースを成り立たせるデータ群
 データのみなので独立性が高い
