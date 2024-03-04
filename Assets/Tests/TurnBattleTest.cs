@@ -8,7 +8,7 @@ public class EditorModeExample
     [Test]
     public void ExampleTest()
     {
-
+        Assert.AreEqual(1, 1);
     }
 
 

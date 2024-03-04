@@ -25,8 +25,6 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<IDropDownPresenter, DropDownPresenter>(Lifetime.Singleton);
         builder.Register<ITurnBattleOutputPort,TurnBattleUIPresenter>(Lifetime.Singleton).WithParameter("view", turnBattleView).WithParameter("statusPresenter", new StatusViewPresentor(playerStatusView,enemyStatusView)).WithParameter("model", new TurnBattleModel());
         
-        //builder.Register<iStatusPresenter, StatusViewPresentor>(Lifetime.Singleton).WithParameter("playerStatusView", playerStatusView).WithParameter("enemyStatusView", enemyStatusView);
-        // testMonoBehaviourのインスタンスを登録する
         builder.RegisterComponent(testMonoBehaviour);
 
     }
