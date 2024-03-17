@@ -22,8 +22,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<IBattleActionInterface, BattleAction>(Lifetime.Singleton);
         builder.Register<ICharacterFactory, CharcterFactoryImpl>(Lifetime.Singleton);
         builder.Register<IDropDownPresenter, DropDownPresenter>(Lifetime.Singleton);
-        builder.Register<IStatusPresenter, StatusViewPresentor>(Lifetime.Singleton).WithParameter("playerStatusView", playerStatusView).WithParameter("enemyStatusView", enemyStatusView);
-
+        builder.Register<IStatusOutputPort, StatusViewPresentor>(Lifetime.Singleton).WithParameter("playerStatusView", playerStatusView).WithParameter("enemyStatusView", enemyStatusView);
         builder.Register<ITurnBattleOutputPort,TurnBattleUIPresenter>(Lifetime.Singleton).WithParameter("view", turnBattleView).WithParameter("model", new TurnBattleModel());
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusViewPresentor : IStatusPresenter
+public class StatusViewPresentor : IStatusOutputPort
 {
     public PlayerStatusView characterStatusView;
     public EnemyStatusView enemyStatusView;

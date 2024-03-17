@@ -13,7 +13,6 @@ public class TurnBattleUIPresenter : ITurnBattleOutputPort
     {
         _view = view;
         _view.SetPresenter(this);
-         //_statusPresenter = statusPresenter;
         _model = model;
 
         _model.PlayerHealth.Subscribe(health => _view.SetPlayerHealth(health)).AddTo(_view);
@@ -37,11 +36,4 @@ public class TurnBattleUIPresenter : ITurnBattleOutputPort
 
         _model.SetPlayerHealth(result);
     }
-
-
-    //public void SetCharcterList(List<Character> playerList, List<Character> enemyList)
-    //{
-    //    _statusPresenter.ViewStatus(playerList,enemyList);;
-    //}
-
 }
