@@ -8,14 +8,12 @@ public class TurnBattleUIPresenter : ITurnBattleOutputPort
     private TurnBattleView _view;
     private TurnBattleModel _model;
 
-    private IStatusPresenter _statusPresenter;
-
     [Inject]
-    public TurnBattleUIPresenter(TurnBattleView view,IStatusPresenter statusPresenter,TurnBattleModel model)
+    public TurnBattleUIPresenter(TurnBattleView view,TurnBattleModel model)
     {
         _view = view;
         _view.SetPresenter(this);
-        _statusPresenter = statusPresenter;
+         //_statusPresenter = statusPresenter;
         _model = model;
 
         _model.PlayerHealth.Subscribe(health => _view.SetPlayerHealth(health)).AddTo(_view);
@@ -41,9 +39,9 @@ public class TurnBattleUIPresenter : ITurnBattleOutputPort
     }
 
 
-    public void SetCharcterList(List<Character> playerList, List<Character> enemyList)
-    {
-        _statusPresenter.ViewStatus(playerList,enemyList);;
-    }
+    //public void SetCharcterList(List<Character> playerList, List<Character> enemyList)
+    //{
+    //    _statusPresenter.ViewStatus(playerList,enemyList);;
+    //}
 
 }

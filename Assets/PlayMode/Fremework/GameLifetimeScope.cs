@@ -11,7 +11,6 @@ public class GameLifetimeScope : LifetimeScope
     public EnemyStatusView enemyStatusView;
     public PlayerStatusView playerStatusView;
 
-    //public Drop
 
 
     protected override void Configure(IContainerBuilder builder)
@@ -21,8 +20,10 @@ public class GameLifetimeScope : LifetimeScope
         
         builder.Register<ITurnBasedBattleInputPort, TurnBasedBattleInteractor>(Lifetime.Singleton); 
         builder.Register<IBattleActionInterface, BattleAction>(Lifetime.Singleton);
-        builder.Register<ICharacterRepository, CharcterRepositoryImpl>(Lifetime.Singleton);
+        builder.Register<ICharacterFactory, CharcterFactoryImpl>(Lifetime.Singleton);
         builder.Register<IDropDownPresenter, DropDownPresenter>(Lifetime.Singleton);
-        builder.Register<ITurnBattleOutputPort,TurnBattleUIPresenter>(Lifetime.Singleton).WithParameter("view", turnBattleView).WithParameter("statusPresenter", new StatusViewPresentor(playerStatusView,enemyStatusView)).WithParameter("model", new TurnBattleModel());
+        builder.Register<IStatusPresenter, StatusViewPresentor>(Lifetime.Singleton).WithParameter("playerStatusView", playerStatusView).WithParameter("enemyStatusView", enemyStatusView);
+
+        builder.Register<ITurnBattleOutputPort,TurnBattleUIPresenter>(Lifetime.Singleton).WithParameter("view", turnBattleView).WithParameter("model", new TurnBattleModel());
     }
 }

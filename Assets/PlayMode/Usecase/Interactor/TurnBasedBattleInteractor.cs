@@ -15,7 +15,7 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 
 
     //リポジトリのインターフェース-------------------------------------
-    private ICharacterRepository _charcterRepository;
+    private ICharacterFactory _charcterRepository;
 
 
     //ロジックのインターフェース-------------------------------------
@@ -24,14 +24,17 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 
     //UIのインターフェース-------------------------------------
     private ITurnBattleOutputPort iTurnBattleOutputPort ;
+
+    private IStatusPresenter _statusPresenter;
     
 
     [Inject]
-    public TurnBasedBattleInteractor(ITurnBattleOutputPort outputPort, ICharacterRepository charcterRepository, IBattleActionInterface battleAction)
+    public TurnBasedBattleInteractor(ITurnBattleOutputPort outputPort,IStatusPresenter statusPresenter, ICharacterFactory charcterRepository, IBattleActionInterface battleAction)
     {
         iTurnBattleOutputPort = outputPort;
         _charcterRepository = charcterRepository;
         iBattleAction = battleAction;
+        _statusPresenter = statusPresenter;
     }
 
     //プレイヤーの初期化
@@ -44,14 +47,16 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
         enemyDialogue = characterDialogs.Item2;
    
         //プレイヤーHPの設定
-        this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);        
+        //this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);    
+        this._statusPresenter.ViewStatus(playerList,enemyList);    
     }
 
     //敵データの初期化、ドロップダウンでマップの選択に合わせてデータを反映
     public void SelectMapAndInitializeEnemy(int i)
     {
         enemyList = _charcterRepository.InitializeEnemy(i);
-        this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);              
+        //this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);     
+        this._statusPresenter.ViewStatus(playerList,enemyList);             
     }
 
     //ターンを進行させる
@@ -68,7 +73,8 @@ public class TurnBasedBattleInteractor : ITurnBasedBattleInputPort
 
         //UIに表示
         this.iTurnBattleOutputPort.SetPlayerHealth(resultList);
-        this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);
+        //this.iTurnBattleOutputPort.SetCharcterList(playerList,enemyList);
+        this._statusPresenter.ViewStatus(playerList,enemyList);    
     }
 
 

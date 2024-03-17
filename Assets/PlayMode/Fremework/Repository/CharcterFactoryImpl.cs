@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CharcterRepositoryImpl : ICharacterRepository
+public class CharcterFactoryImpl : ICharacterFactory
 {
     public List<Character> InitializePlayer()
     {
        PlayerFactory playerFactory = new PlayerFactory();
         return playerFactory.CreatePlayer();
-
     }
 
     public List<Character> InitializeEnemy(int i)

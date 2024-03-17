@@ -9,6 +9,9 @@ public class CardGameFremework : MonoBehaviour
     public IDropDownPresenter dropDownInteractor;
     
     public IBattleController _battleController;
+
+
+    [SerializeField] private TurnBattleView turnBattleView;
         
     [Inject]
     public void InjectMethod(IBattleController controller,IDropDownPresenter dropDownPresentor)

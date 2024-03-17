@@ -17,7 +17,7 @@ public class EditorModeExample
         builder.Register<IBattleController,BattleController>(Lifetime.Singleton);   
         builder.Register<ITurnBasedBattleInputPort, TurnBasedBattleInteractor>(Lifetime.Singleton); 
         builder.Register<IBattleActionInterface, BattleAction>(Lifetime.Singleton);
-        builder.Register<ICharacterRepository, CharcterRepositoryImpl>(Lifetime.Singleton);
+        builder.Register<ICharacterFactory, CharcterFactoryImpl>(Lifetime.Singleton);
         builder.Register<IDropDownPresenter, DropDownPresenter>(Lifetime.Singleton);
         builder.Register<ITurnBattleOutputPort,DummyPresenter>(Lifetime.Singleton);
 
